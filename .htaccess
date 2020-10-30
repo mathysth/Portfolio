@@ -1,0 +1,27 @@
+# protection des fichiers
+Options -Indexes
+
+Options +FollowSymlinks -MultiViews
+
+RewriteEngine On
+RewriteRule ^accueil$ index.php [L]
+RewriteRule ^inscription$ index.php?page=register [L]
+RewriteRule ^connexion$ index.php?page=login [L]
+RewriteRule ^checkout$ index.php?page=checkout [L]
+RewriteRule ^panier$ index.php?page=panier [L]
+RewriteRule ^error$ index.php?page=error [L]
+RewriteRule ^category/([a-z0-9]+(-?[a-z0-9]+)+) index.php?page=shop&category=$1
+RewriteRule ^produit/([a-z0-9]+(-?[a-z0-9]+)+)/([0-9]+)$ index.php?page=product&slug=$1&id=$3
+# CONFIGURATION PAYMENT ENVIRONEMENT
+RewriteRule ^setupPaypalPayment$ app/modeles/Shop/Payment/Paypal/Payment.php [L]
+RewriteRule ^stripeCharge$ app/modeles/Shop/Payment/Stripe/Payment.php [L]
+# /CONFIGURATION PAYMENT ENVIRONEMENT
+#UTILITY PATH
+RewriteRule ^urlAction$ index.php
+#/UTILITY PATH
+#action
+RewriteRule ^logout$ index.php?action=logout [L]
+
+# CONFIGURATION REDIRECTION ERREURS
+ErrorDocument 404 http://localhost:8888/elsa/sandbox/E-commerce-PHP/error
+ErrorDocument 403 http://localhost:8888/elsa/sandbox/E-commerce-PHP/error

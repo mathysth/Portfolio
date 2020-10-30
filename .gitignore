@@ -1,0 +1,5 @@
+#Ignorer les fichiers lors du push de git
+vendor/
+config/website.php
+.idea
+/nbproject/private/

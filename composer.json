@@ -1,0 +1,8 @@
+{
+    "require": {
+        "stripe/stripe-php": "^7.46",
+        "paypal/rest-api-sdk-php": "*",
+        "spipu/html2pdf": "^5.2",
+        "phpmailer/phpmailer": "^6.1"
+    }
+}
