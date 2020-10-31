@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 24 oct. 2020 à 22:44
+-- Généré le : sam. 31 oct. 2020 à 17:14
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.4
 
@@ -29,10 +29,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin_temporary_token` (
                                          `id` int(11) NOT NULL,
-                                         `member_id` int(11) NOT NULL,
-                                         `token` char(255) CHARACTER SET utf8 NOT NULL,
-                                         `createdDate` datetime NOT NULL
+                                         `token` varchar(255) NOT NULL,
+                                         `createdDate` datetime NOT NULL,
+                                         `member_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `admin_temporary_token`
+--
+
+INSERT INTO `admin_temporary_token` (`id`, `token`, `createdDate`, `member_id`) VALUES
+(26, 'wd5hqmwlr$gp00n4psionyqukh5o$b', '2020-10-31 17:12:20', 5);
 
 -- --------------------------------------------------------
 
@@ -53,7 +60,8 @@ INSERT INTO `categorie` (`id`, `libelle`) VALUES
 (1, 'Jazz'),
 (2, 'Rock'),
 (3, 'Blues'),
-(4, 'Enfants');
+(4, 'Enfants'),
+(15, 'mathys');
 
 -- --------------------------------------------------------
 
@@ -82,7 +90,7 @@ INSERT INTO `competences` (`id`, `nom`, `image`, `niveauCompetence`, `competence
 (6, 'xampp', '6.png', '70', 2),
 (7, 'jetbrains', '7.png', '75', 2),
 (8, 'linux', '8.png', '50', 3),
-(9, 'windows', '9.png', '80', 3),
+(9, 'windows', '9.png', '60', 3),
 (10, 'phpmyadmin', '10.png', '70', 4),
 (11, 'sqlserver', '11.png', '50', 4),
 (12, 'sql', '12.png', '60', 4),
@@ -122,6 +130,7 @@ CREATE TABLE `member` (
                           `pseudo` varchar(255) NOT NULL,
                           `email` varchar(100) NOT NULL,
                           `pass` varchar(255) NOT NULL,
+                          `register_date` datetime DEFAULT NULL,
                           `isAdmin` int(11) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -129,8 +138,9 @@ CREATE TABLE `member` (
 -- Déchargement des données de la table `member`
 --
 
-INSERT INTO `member` (`id`, `pseudo`, `email`, `pass`, `isAdmin`) VALUES
-(5, 'mathys', 'mathys@gmail.com', '$2y$10$dsMK/vxmgrJzxox5wT7q7O2uT3tIjE5z/goGlbH7U21bDBp9BYuMa', 1);
+INSERT INTO `member` (`id`, `pseudo`, `email`, `pass`, `register_date`, `isAdmin`) VALUES
+(5, 'mathys', 'mathys@gmail.com', '$2y$10$dsMK/vxmgrJzxox5wT7q7O2uT3tIjE5z/goGlbH7U21bDBp9BYuMa', '2020-10-31 17:08:45', 1),
+(6, 'ddd', 'ddd@gmail.com', '$2y$10$8wtV3Sp7lZuAG5OADq0Cvei97VVm9ACoyNkkmCWgvJAPPfejjeHK6', '2020-10-31 17:08:52', 0);
 
 -- --------------------------------------------------------
 
@@ -174,6 +184,28 @@ CREATE TABLE `panier` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `parcours`
+--
+
+CREATE TABLE `parcours` (
+                            `id` int(11) NOT NULL,
+                            `diplome` varchar(100) NOT NULL,
+                            `annee` varchar(15) NOT NULL,
+                            `etablissement` varchar(100) NOT NULL,
+                            `commune` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `parcours`
+--
+
+INSERT INTO `parcours` (`id`, `diplome`, `annee`, `etablissement`, `commune`) VALUES
+(1, 'Baccalauréat', '2018-2019', 'Lycée Lama-Prévot', 'Guyane Française'),
+(2, 'Brevet', '2015-2016', 'Collège Gerard Holder', 'Guyane Française');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `produit`
 --
 
@@ -209,6 +241,29 @@ INSERT INTO `produit` (`id`, `nom`, `description`, `prix`, `image`, `idCategorie
 (16, 'René la taupe !', 'Live Héraultais !...', '1000.99', 'rene_taupe.jpg', 4),
 (17, 'test', ' fff', '45.00', 'révision.txt', 4);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `realisation`
+--
+
+CREATE TABLE `realisation` (
+                               `id` int(11) NOT NULL,
+                               `titre` varchar(50) NOT NULL,
+                               `images` varchar(255) NOT NULL,
+                               `description` varchar(150) NOT NULL,
+                               `lien` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `realisation`
+--
+
+INSERT INTO `realisation` (`id`, `titre`, `images`, `description`, `lien`) VALUES
+(1, 'Deezer V1.0', 'zikv1_1.png;zikv1_2.png', 'Moteur de recherche deezer créé en cours ,Il permet de rechercher des musiques dans Deezer grâce à l\'api deezer (développé en C#)', '#top'),
+(2, 'Deezer V2.0', 'zikv2_1.png;zikv2_2.png', 'Deezer V2.0 est une version amélioré du moteur de recherche deezer V1.0 créé en cours (développé en C#)', '#top'),
+(3, 'Gestage', 'geststage_1.png;geststage_2.png', 'C\'est une application qui est reliée à une base de donnée (GestEtude) (en VB.net et SQL)', '#top');
+
 --
 -- Index pour les tables déchargées
 --
@@ -217,8 +272,7 @@ INSERT INTO `produit` (`id`, `nom`, `description`, `prix`, `image`, `idCategorie
 -- Index pour la table `admin_temporary_token`
 --
 ALTER TABLE `admin_temporary_token`
-    ADD PRIMARY KEY (`id`),
-    ADD KEY `fk_admin_temporary_token_member_idx` (`member_id`);
+    ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `categorie`
@@ -259,11 +313,23 @@ ALTER TABLE `panier`
     ADD KEY `fk_panier_produit1_idx` (`produit_id`);
 
 --
+-- Index pour la table `parcours`
+--
+ALTER TABLE `parcours`
+    ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `produit`
 --
 ALTER TABLE `produit`
     ADD PRIMARY KEY (`id`),
     ADD KEY `idCategorie` (`idCategorie`);
+
+--
+-- Index pour la table `realisation`
+--
+ALTER TABLE `realisation`
+    ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -273,13 +339,13 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `admin_temporary_token`
 --
 ALTER TABLE `admin_temporary_token`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `competences`
@@ -297,7 +363,7 @@ ALTER TABLE `competence_categories`
 -- AUTO_INCREMENT pour la table `member`
 --
 ALTER TABLE `member`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `onglets`
@@ -312,20 +378,26 @@ ALTER TABLE `panier`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `parcours`
+--
+ALTER TABLE `parcours`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- Contraintes pour les tables déchargées
+-- AUTO_INCREMENT pour la table `realisation`
 --
+ALTER TABLE `realisation`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Contraintes pour la table `admin_temporary_token`
+-- Contraintes pour les tables déchargées
 --
-ALTER TABLE `admin_temporary_token`
-    ADD CONSTRAINT `fk_admin_temporary_token_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `competences`
