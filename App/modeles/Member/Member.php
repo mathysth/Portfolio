@@ -123,12 +123,11 @@ class Member
 
         $req = Database::count("SELECT id FROM member where pseudo = :pseudo or email = :email", array(':pseudo' => $this->pseudo, ":email" => $this->email));
 
-        if (strlen($this->password) > 6) {
+        if (strlen($this->password) >= 6) {
             if ($req != 0) {
                 siteInterface::alert("Oupps...", "Pseudo ou Email déja utilisé", 2);
-
             } else {
-                Database::prepare("INSERT INTO member(pseudo,password,email,register_date) VALUES(:pseudo,:password,:email,Now())", array(':pseudo' => $this->pseudo, ':password' => $password_crypt, ':email' => $this->email), false);
+                Database::prepare("INSERT INTO member(pseudo,pass,email,register_date) VALUES(:pseudo,:password,:email,Now())", array(':pseudo' => $this->pseudo, ':password' => $password_crypt, ':email' => $this->email), false);
                 //TODO: envoyer un email  avec un lien de confirmation pour activer le compte
                 $this->setPassword(null);
                 siteInterface::alert("Succès.", "Inscription effectuée avec succès", 1);
