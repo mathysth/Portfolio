@@ -1,11 +1,9 @@
 <?php
 
-
 namespace School\Controler;
 
-
-use School\ListingError\Member\MemberMessageError;
 use School\Member\Member;
+use School\Website\siteInterface;
 
 class controler_inscription extends controler_default
 {
@@ -29,23 +27,19 @@ class controler_inscription extends controler_default
             $repass = $_POST['repass'];
 
             if(empty($pseudo) || empty($email) || empty($password) ||  empty($repass)){
-                echo MemberMessageError::emptyField();
+                siteInterface::alert("Erreur","Veuillez remplir tout les champs",3);
             }else{
                 if($password == $repass){
                     if(strlen($password) >= 6){
                         $member = new Member($pseudo,$password,$email);
                         $member->createUser();
-                        echo $member->getAlert();
-
                     }else{
-                        echo MemberMessageError::passwordTooShort();
+                        siteInterface::alert("Oupss...","Mot de passe trop cour, 6 caractères minimums",2);
                     }
                 }else{
-                    echo MemberMessageError::bothPasswordAreDifferent();
-
+                    siteInterface::alert("Oupss...","Vos mots de passe sont différents",2);
                 }
             }
         }
     }
-
 }
