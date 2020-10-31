@@ -4,7 +4,7 @@
 namespace School\Member;
 
 use School\Database\Database;
-use School\ListingError\Member\MemberMessageError;
+use School\Website\siteInterface;
 
 /**
  * Class Member
@@ -25,10 +25,6 @@ class Member
      * @var string
      */
     private $email;
-    /**
-     * @var
-     */
-    private $alert;
 
 
     /**
@@ -56,13 +52,6 @@ class Member
     private function setPseudo($pseudo){
         $this->pseudo = $pseudo;
     }
-    /**
-     * @return mixed
-     */
-    public function getAlert()
-    {
-        return $this->alert;
-    }
 
     /**
      * @param $string
@@ -70,14 +59,6 @@ class Member
     private function setEmail($string)
     {
         $this->email = $string;
-    }
-
-    /**
-     * @param mixed $alert
-     */
-    private function setAlert($alert)
-    {
-        $this->alert = $alert;
     }
 
     /**
@@ -120,14 +101,14 @@ class Member
                     $_SESSION['admin'] = $token;
                 }
 
-                $this->setAlert(MemberMessageError::loginSuccess($this->pseudo));
+                siteInterface::alert("Succès", "Connexion éffectué  avec succès sur le compte ". $this->pseudo, 1);
 
             } else {
-                $this->setAlert(MemberMessageError::wrongPassword());
+                siteInterface::alert("Erreur", "Mot de passe incorrect", 3);
             }
 
         } else {
-            $this->setAlert(MemberMessageError::userNotExist());
+            siteInterface::alert("Oupps...", "Utilisateur inexistant", 2);
         }
         return $req;
     }
@@ -138,19 +119,19 @@ class Member
      */
     public function createUser()
     {
-
         $password_crypt = password_hash($this->password, PASSWORD_BCRYPT);
 
         $req = Database::count("SELECT id FROM member where pseudo = :pseudo or email = :email", array(':pseudo' => $this->pseudo, ":email" => $this->email));
 
         if (strlen($this->password) > 6) {
             if ($req != 0) {
-                $this->setAlert(MemberMessageError::userAlreadyUse());
+                siteInterface::alert("Oupps...", "Pseudo ou Email déja utilisé", 2);
+
             } else {
                 Database::prepare("INSERT INTO member(pseudo,password,email,register_date) VALUES(:pseudo,:password,:email,Now())", array(':pseudo' => $this->pseudo, ':password' => $password_crypt, ':email' => $this->email), false);
                 //TODO: envoyer un email  avec un lien de confirmation pour activer le compte
                 $this->setPassword(null);
-                $this->setAlert(MemberMessageError::registerSuccess());
+                siteInterface::alert("Succès.", "Inscription effectuée avec succès", 1);
             }
         }
 
