@@ -29,7 +29,7 @@
                         </select>
                     </div>
                     <div style="padding: 20px 0">
-                        <input type="submit" name="suppressionCat" class="btn btn-primary btn-sm" value="Supprimer Categorie">
+                        <input type="submit" name="suppressionCat" class="btn btn-primary btn-sm" value="Supprimer la Categorie">
                     </div>
                 </div>
             </form>
