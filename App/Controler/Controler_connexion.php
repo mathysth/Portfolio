@@ -3,8 +3,8 @@
 
 namespace School\Controler;
 
-use School\ListingError\Member\MemberMessageError;
 use School\Member\Member;
+use School\Website\siteInterface;
 
 /**
  * Class controler_connexion
@@ -39,12 +39,11 @@ class Controler_connexion extends controler_default
             $password = $_POST['password'];
 
             if(empty($pseudo) || empty($password)){
-                echo MemberMessageError::emptyField();
+                siteInterface::alert("Erreur", "Veuillez remplir tout les champs", 3);
             }else{
 
                 $member = new Member($pseudo,$password);
                 $bddResponse = $member->logUser();
-                echo $member->getAlert();
                 if($bddResponse != null){
                     if(isset($_POST['remindMe']) and $_POST['remindMe'] == "on"){
                         setcookie("user",$pseudo,time() + 3600 * 24 * 2);
