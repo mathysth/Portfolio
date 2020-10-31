@@ -4,8 +4,8 @@ require_once('App/modeles/Autoloader.php');
 $autoload = new \School\Autoloader();
 $autoload::register();
 
-$controlerDefault = new \School\Controler\controler_default();
-$arrayNav = $controlerDefault->getAllOnglets();
+$arrayNav = \School\Controler\controler_default::getAllOnglets();
+$islogin = \School\Controler\controler_default::islogin();
 
 ob_start();
 

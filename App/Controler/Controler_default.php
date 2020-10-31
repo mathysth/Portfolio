@@ -7,6 +7,7 @@ namespace School\Controler;
 use School\Chemins\Chemins;
 use School\Database\Database;
 use School\Shop\Shop;
+use School\Website\siteInterface;
 
 /**
  * Class controler_default
@@ -14,36 +15,10 @@ use School\Shop\Shop;
  */
 class controler_default
 {
-
-    /**
-     * @var string
-     */
-    private $css = Chemins::STYLE;
-    /**
-     * @var string
-     */
-    private $js =  Chemins::JS;
-
-    /**
-     * @return string
-     */
-    public function getCss()
-    {
-        return $this->css;
-    }
-
-    /**
-     * @return string
-     */
-    public function getJs()
-    {
-        return $this->js;
-    }
-
     /**
      * @return bool
      */
-    public function islogin(){
+    public static function islogin(){
         if(isset($_SESSION['user'])){
             return  true;
         }else{
@@ -54,8 +29,8 @@ class controler_default
     /**
      * @return array|bool|mixed
      */
-    public function getAllOnglets(){
-         return Database::prepare("SELECT * FROM onglets",null, true, null );
+    public static function getAllOnglets(){
+         return siteInterface::getInterfaceOnglets();
     }
 
     /**

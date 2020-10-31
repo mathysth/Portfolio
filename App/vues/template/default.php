@@ -59,6 +59,25 @@
                             <?php }
                         }
                     ?>
+                    <?php
+                    if($islogin){ ?>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Membre <i class="fas fa-sort-down"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="?controleur=espaceMembre">Espace Membre</a>
+                                    <a class="dropdown-item" href="?controleur=deconnexion">Déconnexion</a>
+                            </div>
+                        </li>
+
+                    <?php }else{?>
+                        <li class="nav-item"><a href="?controleur=connexion" class="nav-link">Connexion</a></li>
+                        <li class="nav-item"><a href="?controleur=inscription" class="nav-link">Inscription</a></li>
+                    <?php
+                    }
+                    ?>
                     <li class="nav-item"><a href="mailto:mathystheolade973@gmail.com" class="nav-link">Contact</a></li>
 
 
