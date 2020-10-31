@@ -5,6 +5,7 @@ namespace School\Controler;
 
 
 use School\Database\Database;
+use School\Shop\Shop;
 
 class Controler_shop extends controler_default
 {
@@ -37,7 +38,7 @@ class Controler_shop extends controler_default
      */
     private function getLesProduits(){
         if(isset($_GET['categorie']) && !empty($_GET['categorie'])){
-            return Database::prepare('SELECT *  FROM produit p, categorie c Where p.idCategorie = c.id AND libelle = :libCateg', array(":libCateg" => $_GET["categorie"]) , true,  null);
+            return Shop::getLesProduits($_GET["categorie"]);
         }
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace School\Website;
 
+use School\Database\Database;
+
 /**
  * Class siteInterface
  * @package School\Website
@@ -50,6 +52,39 @@ class siteInterface
         echo "<script> alertPlugin('$titre','$message','$possibleType') </script>";
     }
 
+    /**
+     * @return array|bool|mixed
+     */
+    public static function getInterfaceOnglets() {
+        return Database::prepare("SELECT * FROM onglets",null, true, null );
+    }
 
+    /**
+     * @return array|bool|mixed
+     */
+    public static function getCompetenceCategories(){
+        return Database::prepare('Select * from competence_categories', null, true, false);
+    }
+
+    /**
+     * @return array|bool|mixed
+     */
+    public static function getCompétences(){
+        return Database::prepare('Select * from competences', null, true, false);
+    }
+
+    /**
+     * @return array|bool|mixed
+     */
+    public static function getRealisations(){
+        return Database::prepare("SELECT * FROM realisation", null , true, false);
+    }
+
+    /**
+     * @return array|bool|mixed
+     */
+    public static function getParcour(){
+        return Database::prepare("SELECT * FROM parcours", null, true, false);
+    }
 
 }

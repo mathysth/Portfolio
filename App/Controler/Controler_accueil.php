@@ -5,6 +5,7 @@ namespace School\Controler;
 
 
 use School\Database\Database;
+use School\Website\siteInterface;
 
 /**
  * Class controler_accueil
@@ -40,7 +41,7 @@ class controler_accueil extends controler_default
      */
     private function getCompetencesCategorie()
     {
-        return Database::prepare('Select * from competence_categories', null, true, false);
+        return siteInterface::getCompetenceCategories();
     }
 
     /**
@@ -48,14 +49,14 @@ class controler_accueil extends controler_default
      */
     private function getCompetences()
     {
-        return Database::prepare('Select * from competences', null, true, false);
+        return siteInterface::getCompétences();
     }
 
     private function getRealisation(){
-        return Database::prepare("SELECT * FROM realisation", null , true, false);
+        return siteInterface::getRealisations();
     }
 
     private function getParcour(){
-        return Database::prepare("SELECT * FROM parcours", null, true, false);
+        return siteInterface::getParcour();
     }
 }
