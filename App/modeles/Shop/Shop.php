@@ -58,4 +58,11 @@ class Shop
         Database::prepare("DELETE FROM categorie WHERE id =:id",array(":id" => $id),null,false);
     }
 
+    /**
+     * @return array|bool|mixed
+     */
+    public static function getLesProduits($categorie){
+        return Database::prepare('SELECT *  FROM produit p, categorie c Where p.idCategorie = c.id AND libelle = :libCateg', array(":libCateg" => $categorie) , true,  null);
+    }
+
 }
