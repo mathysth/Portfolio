@@ -87,6 +87,7 @@ class Member
                 $id = $req[0];
 
                 $_SESSION['memberId'] = $id;
+                $_SESSION['registerDate'] = $req['register_date'];
                 $_SESSION['user'] = $this->pseudo;
                 $_SESSION['email'] = $this->email;
 
@@ -134,6 +135,13 @@ class Member
             }
         }
 
+    }
+
+    /**
+     * @param $id
+     */
+    public static function deleteCompte($id){
+        Database::prepare("Delete from member Where id = :id", array(":id" => $id),false);
     }
 
     /**
