@@ -17,6 +17,7 @@ class Controler_connexion extends controler_default
      */
     public function __construct()
     {
+        $this->redirectIfIsLog();
         $this->logMember();
         $this->show();
     }
@@ -41,7 +42,6 @@ class Controler_connexion extends controler_default
             if(empty($pseudo) || empty($password)){
                 siteInterface::alert("Erreur", "Veuillez remplir tout les champs", 3);
             }else{
-
                 $member = new Member($pseudo,$password);
                 $bddResponse = $member->logUser();
                 if($bddResponse != null){

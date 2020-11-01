@@ -68,11 +68,17 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="?controleur=espaceMembre">Espace Membre</a>
-                                    <a class="dropdown-item" href="?controleur=deconnexion">Déconnexion</a>
+                                    <a class="dropdown-item" href="?controleur=espaceMembre&action=deconnexion">Déconnexion</a>
                             </div>
                         </li>
 
-                    <?php }else{?>
+                    <?php
+                        if(isset($admin)){ ?>
+                            <li class="nav-item"><a href="?controleur=admin" class="nav-link">Admin</a></li>
+                    <?php
+                    }
+                    }else{
+                    ?>
                         <li class="nav-item"><a href="?controleur=connexion" class="nav-link">Connexion</a></li>
                         <li class="nav-item"><a href="?controleur=inscription" class="nav-link">Inscription</a></li>
                     <?php

@@ -3,9 +3,6 @@
 
 namespace School\Controler;
 
-
-use School\Chemins\Chemins;
-use School\Database\Database;
 use School\Shop\Shop;
 use School\Website\siteInterface;
 
@@ -15,10 +12,17 @@ use School\Website\siteInterface;
  */
 class controler_default
 {
+
+    protected function redirectIfIsLog(){
+        if($this->islogin()){
+            header('Location: ?controleur=espaceMembre');
+        }
+    }
+
     /**
      * @return bool
      */
-    public static function islogin(){
+    public function islogin(){
         if(isset($_SESSION['user'])){
             return  true;
         }else{
@@ -27,10 +31,29 @@ class controler_default
     }
 
     /**
+     * @return bool
+     */
+    public function isAdmin(){
+        if(isset($_SESSION['admin'])){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
      * @return array|bool|mixed
      */
-    public static function getAllOnglets(){
+    public function getAllOnglets(){
          return siteInterface::getInterfaceOnglets();
+    }
+
+    /**
+     * @return string
+     */
+    public  function getCurrentUrl(){
+        $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === 0 ? 'https://' : 'http://';
+        return $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     }
 
     /**

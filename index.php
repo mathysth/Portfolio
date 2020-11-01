@@ -4,8 +4,10 @@ require_once('App/modeles/Autoloader.php');
 $autoload = new \School\Autoloader();
 $autoload::register();
 
-$arrayNav = \School\Controler\controler_default::getAllOnglets();
-$islogin = \School\Controler\controler_default::islogin();
+$controlerDefault = new \School\Controler\controler_default();
+$arrayNav = $controlerDefault->getAllOnglets();
+$islogin = $controlerDefault->islogin();
+$admin = $controlerDefault->isAdmin();
 
 ob_start();
 
