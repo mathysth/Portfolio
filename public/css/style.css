@@ -360,6 +360,40 @@ span.right-lm{
 span.objet-lm{
   font-weight: bold;
 }
+/*********************
+
+     ADMIN
+
+ *********************/
+#h1_accueil_admin{
+  text-align: center;
+  padding: 20px;
+  font-family: Averta,Helvetica,Arial,sans-serif;
+  color: black !important;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  white-space: normal;
+}
+.card_admin{
+  border: 0 !important;
+  padding: 30px;
+}
+
+.card_admin:hover{
+  box-shadow: 2px 4px 12px grey;
+  transition: all 1s;
+}
+
+.text_card_admin p{
+  text-align: center;
+  font-family: Averta,Helvetica,Arial,sans-serif;
+  color: black !important;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  white-space: normal;
+}
 
 /*********************
 

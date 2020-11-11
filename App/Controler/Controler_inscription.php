@@ -10,6 +10,7 @@ class controler_inscription extends controler_default
 
     public function __construct()
     {
+        $this->redirectIfIsNotLog();
         $this->addMember();
         $this->show();
     }

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?= \School\Chemins\Chemins::STYLE ?>bootstrap.min.css">
     <link rel="stylesheet" href="<?= \School\Chemins\Chemins::STYLE ?>bootstrap-grid.min.css">
     <link rel="stylesheet" href="<?= \School\Chemins\Chemins::STYLE ?>bootstrap-reboot.min.css">
-    <link rel="stylesheet" href="<?= \School\Chemins\Chemins::STYLE ?>style.css?<?= date('s')?>">
+    <link rel="stylesheet" href="<?= \School\Chemins\Chemins::STYLE ?>style.css?<?= date_timestamp_get(date_create())?>">
 
     <!-- Font / ScrollTools  -->
     <script src="https://kit.fontawesome.com/54309b8d30.js" crossorigin="anonymous"></script>

@@ -10,6 +10,7 @@ class Controler_ajoutAdmin extends controler_default_admin
 
     public function __construct()
     {
+        $this->setPageToAdminAccess();
         $this->show();
     }
 

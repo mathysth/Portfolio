@@ -23,5 +23,5 @@ RewriteRule ^urlAction$ index.php
 RewriteRule ^logout$ index.php?action=logout [L]
 
 # CONFIGURATION REDIRECTION ERREURS
-ErrorDocument 404 http://localhost:8888/elsa/sandbox/E-commerce-PHP/error
-ErrorDocument 403 http://localhost:8888/elsa/sandbox/E-commerce-PHP/error
+ErrorDocument 404 http://localhost/www/Ecole/PPE/PPE-SIO
+ErrorDocument 403 http://localhost/www/Ecole/PPE/PPE-SIO

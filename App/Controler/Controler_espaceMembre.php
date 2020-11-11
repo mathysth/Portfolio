@@ -46,6 +46,11 @@ class Controler_espaceMembre extends controler_default
     public function deconnexion(){
         session_destroy();
         Controler_action::returnUser();
+        if(isset($_GET['returnUri'])){
+            header("Location: ".$_GET['returnUri']);
+        }else{
+            header("Location: index.php");
+        }
     }
 
     private function leftBar(){
